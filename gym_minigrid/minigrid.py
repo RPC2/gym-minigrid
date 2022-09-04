@@ -577,7 +577,7 @@ class Grid:
         return grid, vis_mask
 
     def process_vis(grid, agent_pos):
-        mask = np.zeros(shape=(grid.width, grid.height), dtype=np.bool)
+        mask = np.zeros(shape=(grid.width, grid.height), dtype=bool)
 
         mask[agent_pos[0], agent_pos[1]] = True
 
@@ -1220,18 +1220,17 @@ class MiniGridEnv(gym.Env):
 
         return obs
 
-    def get_obs_render(self, obs, tile_size=TILE_PIXELS//2):
+    def get_obs_render(self, obs, tile_size=TILE_PIXELS//2, agent_dir=3):
         """
         Render an agent observation for visualization
         """
-
         grid, vis_mask = Grid.decode(obs)
 
         # Render the whole grid
         img = grid.render(
             tile_size,
             agent_pos=(self.agent_view_size // 2, self.agent_view_size - 1),
-            agent_dir=3,
+            agent_dir=agent_dir,
             highlight_mask=vis_mask
         )
 

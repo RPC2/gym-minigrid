@@ -7,11 +7,13 @@ class LavaGapEnv(MiniGridEnv):
     This environment is similar to LavaCrossing but simpler in structure.
     """
 
-    def __init__(self, size, obstacle_type=Lava, seed=None):
+    def __init__(self, size, max_steps=None, obstacle_type=Lava, seed=None):
         self.obstacle_type = obstacle_type
+        if max_steps is None:
+            max_steps = 4*size*size
         super().__init__(
             grid_size=size,
-            max_steps=4*size*size,
+            max_steps=max_steps,
             # Set this to True for maximum speed
             see_through_walls=False,
             seed=None
